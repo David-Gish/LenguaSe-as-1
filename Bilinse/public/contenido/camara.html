@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>iGame - Abecedario en LSC</title>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <style>
+    body { text-align: center; font-family: Arial, sans-serif; background: #f9f9f9; }
+    #camara { padding: 20px; }
+    video { display: none; } /* video oculto */
+    canvas {
+      width: 500px; max-width: 100%; margin-top: 15px;
+      border-radius: 12px; border: 3px solid #4CAF50;
+    }
+    #letraDetectada, #juego {
+      margin-top: 20px; font-size: 20px; font-weight: bold; color: #2c3e50;
+    }
+    .botones { margin-top: 15px; }
+    button {
+      padding: 10px 20px; margin: 5px;
+      font-size: 16px; border: none; border-radius: 8px;
+      cursor: pointer; background: #4CAF50; color: white;
+    }
+    button:hover { background: #45a049; }
+    button.stop { background: #e74c3c; }
+    button.stop:hover { background: #c0392b; }
+    #aciertos { margin-top: 10px; font-size: 18px; color: #16a085; }
+  </style>
+</head>
+<body>
+  <section id="camara">
+    <h2>🎮 iGame: Aprende el Abecedario en LSC</h2>
+    <p>Mira la letra en pantalla y haz la seña frente a la cámara.</p>
+
+    <video id="video" autoplay playsinline></video>
+    <canvas id="output"></canvas>
+
+    <div class="botones">
+      <button onclick="iniciarCamara()">Activar Cámara</button>
+      <button class="stop" onclick="detenerCamara()">Desactivar Cámara</button>
+      <button onclick="iniciarJuego()">Iniciar Juego</button>
+    </div>
+
+    <div id="juego">🎯 Letra objetivo: ---</div>
+    <div id="letraDetectada">✋ Letra detectada: Ninguna</div>
+    <div id="aciertos">✅ Aciertos: 0</div>
+  </section>
+
+  <script>
+    const videoElement = document.getElementById('video');
+    const canvasElement = document.getElementById('output');
+    const canvasCtx = canvasElement.getContext('2d');
+    const letraTexto = document.getElementById("letraDetectada");
+    const juegoTexto = document.getElementById("juego");
+    const aciertosTexto = document.getElementById("aciertos");
+
+    let camera = null;
+    let letraObjetivo = null;
+    let aciertos = 0;
+
+    // Configuración de MediaPipe Hands
+    const hands = new Hands({
+      locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+    });
+
+    hands.setOptions({
+      maxNumHands: 1,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.7,
+      minTrackingConfidence: 0.7
+    });
+
+    hands.onResults(onResults);
+
+    function onResults(results) {
+      canvasCtx.save();
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+      if (results.multiHandLandmarks) {
+        for (const landmarks of results.multiHandLandmarks) {
+          drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
+                         {color: '#00FF00', lineWidth: 3});
+          drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+
+          const letra = detectarLetra(landmarks);
+          letraTexto.innerText = "✋ Letra detectada: " + letra;
+
+          // Comprobar si acertó la letra del juego
+          if (letra === letraObjetivo) {
+            aciertos++;
+            aciertosTexto.innerText = "✅ Aciertos: " + aciertos;
+            siguienteReto();
+          }
+        }
+      } else {
+        letraTexto.innerText = "✋ Letra detectada: Ninguna";
+      }
+      canvasCtx.restore();
+    }
+
+    // Reglas básicas de detección
+    function detectarLetra(landmarks) {
+      const dedos = {
+        pulgar: landmarks[4].y < landmarks[3].y,
+        indice: landmarks[8].y < landmarks[6].y,
+        medio: landmarks[12].y < landmarks[10].y,
+        anular: landmarks[16].y < landmarks[14].y,
+        menique: landmarks[20].y < landmarks[18].y
+      };
+
+      if (!dedos.pulgar && !dedos.indice && !dedos.medio && !dedos.anular && !dedos.menique) {
+        return "A"; // puño cerrado
+      }
+      if (!dedos.pulgar && dedos.indice && !dedos.medio && !dedos.anular && !dedos.menique) {
+        return "D"; // solo índice
+      }
+      if (!dedos.pulgar && dedos.indice && dedos.medio && !dedos.anular && !dedos.menique) {
+        return "U"; // índice y medio
+      }
+      if (dedos.indice && dedos.medio && dedos.anular && dedos.menique) {
+        return "B"; // mano abierta
+      }
+      return "Desconocida";
+    }
+
+    // Funciones del iGame
+    function iniciarJuego() {
+      aciertos = 0;
+      aciertosTexto.innerText = "✅ Aciertos: 0";
+      siguienteReto();
+    }
+
+    function siguienteReto() {
+      const letrasDisponibles = ["A", "B", "D", "U"];
+      letraObjetivo = letrasDisponibles[Math.floor(Math.random() * letrasDisponibles.length)];
+      juegoTexto.innerText = "🎯 Letra objetivo: " + letraObjetivo;
+    }
+
+    // Cámara
+    function iniciarCamara() {
+      if (!camera) {
+        camera = new Camera(videoElement, {
+          onFrame: async () => { await hands.send({image: videoElement}); },
+          width: 500, height: 400
+        });
+      }
+      camera.start();
+    }
+
+    function detenerCamara() {
+      if (camera) {
+        camera.stop();
+      }
+      letraTexto.innerText = "✋ Cámara apagada";
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    }
+  </script>
+</body>
+</html>

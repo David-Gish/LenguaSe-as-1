@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="../estilos/registro.css">
+  <script>
+    function login(event) {
+      event.preventDefault();
+      const user = document.getElementById("usuario").value;
+      const pass = document.getElementById("clave").value;
+
+      if (user === "admin" && pass === "1234") {
+        alert("✅ Bienvenido " + user);
+        window.location.href = "cursos.html"; 
+      } else {
+        alert("❌ Usuario o clave incorrectos");
+      }
+    }
+  </script>
+</head>
+<body>
+  <section class="login-box">
+    <h2>Iniciar Sesión</h2>
+    <form onsubmit="login(event)">
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" required>
+
+      <label for="clave">Contraseña:</label>
+      <input type="password" id="clave" required>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p>¿No tienes cuenta?</p>
+    <button onclick="window.location.href='registro.html'">Crear cuenta</button>
+  </section>
+</body>
+</html>

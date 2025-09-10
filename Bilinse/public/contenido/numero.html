@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Adivina el Número con Seña</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      background: #FF9800;
+      color: white;
+      padding: 15px;
+      margin: 0;
+    }
+    #numero {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 500px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100px;
+      text-align: center;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #FF5722;
+      color: white;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    button:hover {
+      background: #e64a19;
+    }
+    #mensaje {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    #señaNumero {
+      margin-top: 20px;
+      width: 150px;
+      height: 150px;
+      border: 3px solid #FF9800;
+      border-radius: 15px;
+      background: #fff3e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #señaNumero img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔢 Adivina el Número con Seña</h1>
+
+  <div id="numero">
+    <p>Estoy pensando en un número entre 1 y 10</p>
+    <input type="number" id="guess" min="1" max="10">
+    <br>
+    <button onclick="adivinar()">Adivinar</button>
+    <button onclick="reiniciar()">Reiniciar</button>
+
+    <div id="señaNumero">
+      <img id="imagenSeña" src="" alt="Seña del número">
+    </div>
+
+    <p id="mensaje"></p>
+    <p>Intentos restantes: <span id="intentos">3</span></p>
+  </div>
+
+  <script>
+    // Diccionario de imágenes de señas (puedes reemplazar con tus imágenes locales)
+       const imagenesSeñas = {
+      1: "https://previews.123rf.com/images/captainvector/captainvector2204/captainvector220455529/185249899-sign-language-number-1.jpg",
+      2: "https://previews.123rf.com/images/captainvector/captainvector2204/captainvector220455492/185249861-sign-language-number-2.jpg",
+      3: "https://previews.123rf.com/images/captainvector/captainvector2204/captainvector220455414/185249782-sign-language-number-3.jpg",
+      4: "https://c8.alamy.com/comp/K76MNX/sign-languagenumber-4-K76MNX.jpg",
+      5: "https://previews.123rf.com/images/kaer123/kaer1232202/kaer123220200108/182939129-number-five-in-a-deaf-mute-hand-gesture-alphabet-hand-drawn-engraving-style-vector-american-sign.jpg",
+      6: "https://us.123rf.com/450wm/kaer123/kaer1232202/kaer123220200080/182657119-logotipo-n%C3%BAmero-seis-en-un-alfabeto-de-gestos-de-mano-sordomuda-ilustraci%C3%B3n-de-lenguaje-de-se%C3%B1as.jpg?ver=6",
+      7: "https://previews.123rf.com/images/kaer123/kaer1232202/kaer123220200096/182939054-number-seven-in-a-deaf-mute-hand-gesture-alphabet-hand-drawn-engraving-style-vector-american-sign.jpg",
+      8: "https://previews.123rf.com/images/kaer123/kaer1232202/kaer123220200099/182939057-number-eight-in-a-deaf-mute-hand-gesture-alphabet-hand-drawn-engraving-style-vector-american-sign.jpg",
+      9: "https://st.depositphotos.com/5142301/54985/v/1600/depositphotos_549850504-stock-illustration-number-nine-logo-deaf-mute.jpg",
+      10:"https://st.depositphotos.com/1029434/4867/v/950/depositphotos_48674073-stock-illustration-sign-languagenumber-10.jpg"
+    };
+
+    
+    let numeroSecreto;
+    let intentosRestantes = 3;
+
+    function generarNumero() {
+      numeroSecreto = Math.floor(Math.random() * 10) + 1;
+      document.getElementById("imagenSeña").src = imagenesSeñas[numeroSecreto];
+      document.getElementById("mensaje").innerText = "";
+      document.getElementById("guess").value = "";
+      intentosRestantes = 3;
+      document.getElementById("intentos").innerText = intentosRestantes;
+    }
+
+    function adivinar() {
+      let intento = parseInt(document.getElementById("guess").value);
+      if (isNaN(intento)) {
+        document.getElementById("mensaje").innerText = "⚠️ Ingresa un número válido.";
+        return;
+      }
+
+      intentosRestantes--;
+      document.getElementById("intentos").innerText = intentosRestantes;
+
+      if (intento === numeroSecreto) {
+        document.getElementById("mensaje").innerText = "🎉 ¡Correcto! El número era " + numeroSecreto;
+        setTimeout(generarNumero, 2000); // Pasar al siguiente número
+      } else if (intento < numeroSecreto) {
+        document.getElementById("mensaje").innerText = "El número es más alto ⬆️";
+      } else {
+        document.getElementById("mensaje").innerText = "El número es más bajo ⬇️";
+      }
+
+      if (intentosRestantes <= 0 && intento !== numeroSecreto) {
+        document.getElementById("mensaje").innerText = "❌ Se acabaron los intentos. El número era " + numeroSecreto;
+        setTimeout(generarNumero, 2000); // Pasar al siguiente número automáticamente
+      }
+    }
+
+    function reiniciar() {
+      document.getElementById("guess").value = "";
+      document.getElementById("mensaje").innerText = "";
+      intentosRestantes = 3;
+      document.getElementById("intentos").innerText = intentosRestantes;
+    }
+
+    // Inicializa el juego
+    generarNumero();
+  </script>
+</body>
+</html>

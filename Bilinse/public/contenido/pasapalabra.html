@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pasapalabra</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      background: #673AB7;
+      color: white;
+      padding: 15px;
+      margin: 0;
+    }
+    #pasapalabra {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 600px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 200px;
+      text-align: center;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #9C27B0;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #7b1fa2;
+    }
+    #feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔤 Pasapalabra</h1>
+
+  <div id="pasapalabra">
+    <p id="letra"></p>
+    <p id="definicion"></p>
+    <input type="text" id="respuesta" placeholder="Escribe tu respuesta">
+    <br>
+    <button onclick="responder()">Responder</button>
+    <p id="feedback"></p>
+  </div>
+
+  <script>
+    const palabras = [
+      { letra: "A", definicion: "Con la A: Seña que representa la primera letra del abecedario", respuesta: "A" },
+      { letra: "B", definicion: "Con la B: Seña que representa la segunda letra del abecedario", respuesta: "B" },
+      { letra: "C", definicion: "Con la C: Seña usada para la palabra Colombia", respuesta: "C" }
+    ];
+
+    let indiceP = 0;
+
+    function cargarPasapalabra() {
+      let p = palabras[indiceP];
+      document.getElementById("letra").innerText = "Letra: " + p.letra;
+      document.getElementById("definicion").innerText = p.definicion;
+      document.getElementById("respuesta").value = "";
+      document.getElementById("feedback").innerText = "";
+    }
+
+    function responder() {
+      let p = palabras[indiceP];
+      let resp = document.getElementById("respuesta").value.trim().toUpperCase();
+      if (resp === p.respuesta) {
+        document.getElementById("feedback").innerText = "✅ Correcto!";
+      } else {
+        document.getElementById("feedback").innerText = "❌ Incorrecto. Era: " + p.respuesta;
+      }
+      indiceP = (indiceP + 1) % palabras.length;
+      setTimeout(cargarPasapalabra, 2000);
+    }
+
+    cargarPasapalabra();
+  </script>
+</body>
+</html>
