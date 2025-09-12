@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Actividad de Preguntas con Señas</title>  
+</head>
+<body>
+    <style>
+         body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .actividad {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    img {
+      max-width: 150px;
+      margin: 10px 0;
+    }
+    .opciones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .opciones button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #3498db;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .opciones button:hover {
+      background: #2980b9;
+    }
+    #resultado {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    #salir {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: #27ae60;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      display: none;
+    }
+    #salir:hover {
+      background: #219150;
+    }
+    </style>
+  <section class="actividad">
+    <h2>Actividad: Preguntas con Señas</h2>
+    <p>Selecciona la respuesta correcta para cada seña:</p>
+
+    <div id="contenedorPregunta">
+      <h3 id="preguntaTexto"></h3>
+      <img id="preguntaImagen" src="" alt="Seña">
+      <div class="opciones" id="opciones"></div>
+    </div>
+
+    <p id="resultado"></p>
+   <button id="salir" onclick="window.location.href='../cursos.html'">Salir al Curso</button>
+  </section>
+
+  <script>
+    // Preguntas con imágenes y respuestas
+    const preguntas = [
+      { img: "../assets/a.png", texto: "¿Qué letra representa esta seña?", opciones: ["A","B","C","D"], respuesta: "A" },
+      { img: "../assets/b.png", texto: "¿Qué letra representa esta seña?", opciones: ["A","B","C","D"], respuesta: "B" },
+      { img: "../assets/c.png", texto: "¿Qué letra representa esta seña?", opciones: ["C","D","A","B"], respuesta: "C" },
+      { img: "../assets/d.png", texto: "¿Qué letra representa esta seña?", opciones: ["A","C","D","B"], respuesta: "D" },
+      { img: "../assets/e.png", texto: "¿Qué letra representa esta seña?", opciones: ["E","F","G","H"], respuesta: "E" },
+      { img: "../assets/f.jpg", texto: "¿Qué letra representa esta seña?", opciones: ["A","F","C","D"], respuesta: "F" },
+      { img: "../assets/g.png", texto: "¿Qué letra representa esta seña?", opciones: ["G","H","I","J"], respuesta: "G" },
+      { img: "../assets/h.png", texto: "¿Qué letra representa esta seña?", opciones: ["A","H","C","D"], respuesta: "H" }
+    ];
+
+    let indice = 0;
+    let puntaje = 0;
+
+    function cargarPregunta() {
+      const pregunta = preguntas[indice];
+      document.getElementById("preguntaTexto").textContent = pregunta.texto;
+      document.getElementById("preguntaImagen").src = pregunta.img;
+
+      const opcionesDiv = document.getElementById("opciones");
+      opcionesDiv.innerHTML = "";
+
+      pregunta.opciones.forEach(opcion => {
+        const btn = document.createElement("button");
+        btn.textContent = opcion;
+        btn.onclick = () => verificarRespuesta(opcion);
+        opcionesDiv.appendChild(btn);
+      });
+    }
+
+    function verificarRespuesta(opcion) {
+      const pregunta = preguntas[indice];
+      if (opcion === pregunta.respuesta) {
+        puntaje++;
+        document.getElementById("resultado").textContent = "✅ Correcto!";
+      } else {
+        document.getElementById("resultado").textContent = "❌ Incorrecto. La respuesta era " + pregunta.respuesta;
+      }
+
+      indice++;
+      if (indice < preguntas.length) {
+        setTimeout(() => {
+          document.getElementById("resultado").textContent = "";
+          cargarPregunta();
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          document.getElementById("contenedorPregunta").innerHTML = `<h3>Actividad finalizada</h3><p>Tu puntaje: ${puntaje} / ${preguntas.length}</p>`;
+          document.getElementById("resultado").textContent = "";
+          document.getElementById("salir").style.display = "inline-block";
+        }, 1000);
+      }
+    }
+
+    // Inicializar
+    cargarPregunta();
+  </script>
+</body>
+</html>

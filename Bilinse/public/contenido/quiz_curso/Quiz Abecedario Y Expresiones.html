@@ -7,76 +7,95 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      background: linear-gradient(135deg, #e3f2fd, #ede7f6);
+      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
       margin: 0;
       padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .container {
-      max-width: 800px;
-      margin: 40px auto;
+      max-width: 850px;
+      margin: 20px;
       padding: 30px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.9);
+      border-radius: 25px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
       animation: fadeIn 1s ease-in-out;
     }
     h1 {
-      color: #1a237e;
-      margin-bottom: 20px;
+      color: #311b92;
+      margin-bottom: 25px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
     .question img {
-      max-width: 200px;
-      margin: 15px auto;
-      border: 3px solid #1a237e;
-      border-radius: 15px;
-      padding: 5px;
-      background: #e8eaf6;
+      max-width: 220px;
+      margin: 20px auto;
+      border: 4px solid #311b92;
+      border-radius: 20px;
+      padding: 6px;
+      background: #ede7f6;
+      transition: transform 0.3s ease;
+    }
+    .question img:hover {
+      transform: scale(1.05);
+    }
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
     }
     .options button {
-      display: block;
-      margin: 12px auto;
-      padding: 12px;
-      width: 70%;
+      padding: 14px 22px;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
       color: #fff;
-      background: #3949ab;
+      background: linear-gradient(135deg, #3949ab, #5c6bc0);
       transition: all 0.3s ease;
+      min-width: 80px;
     }
-    .options button:hover { background: #303f9f; }
-    .options button.correct { background: #2e7d32 !important; }
-    .options button.wrong { background: #c62828 !important; }
-    #submitBtn {
+    .options button:hover { 
+      background: linear-gradient(135deg, #303f9f, #3949ab);
+      transform: scale(1.05);
+    }
+    #submitBtn, #retryBtn {
       margin-top: 25px;
       padding: 14px 28px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
-      background: #0288d1;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
       color: #fff;
       font-size: 18px;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.3s;
-    }
-    #submitBtn:hover { background: #0277bd; }
-    .nav-btn {
-      margin-top: 25px;
+      transition: transform 0.3s ease;
       display: inline-block;
-      padding: 12px 20px;
-      border-radius: 12px;
-      background: #0066cc;
+    }
+    #submitBtn:hover, #retryBtn:hover { 
+      transform: scale(1.05);
+    }
+    .nav-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #00b09b, #96c93d);
       color: #fff;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
+      font-size: 16px;
+      transition: transform 0.3s ease;
     }
-    .nav-btn:hover { background: #004d99; }
+    .nav-btn:hover { transform: scale(1.05); }
     #scoreText {
       margin-top: 20px;
-      font-size: 20px;
+      font-size: 22px;
       color: #1a237e;
       font-weight: bold;
     }
@@ -88,8 +107,8 @@
     }
     .dot {
       display: inline-block;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       margin: 3px;
       border-radius: 50%;
       background: #0288d1;
@@ -107,18 +126,19 @@
     <div class="question" id="questionBox"></div>
     <div class="options" id="optionsBox"></div>
     <button id="submitBtn">Enviar Respuesta</button>
+    <button id="retryBtn" style="display:none;">🔄 Volver a Intentar</button>
     <p class="attempts" id="attemptsBox"></p>
     <p id="scoreText"></p>
-    <a href="curso.html" class="nav-btn">⬅ Volver al curso</a>
+    <a href="../cursos.html" class="nav-btn">⬅ Volver al curso</a>
   </div>
 
   <script>
     const questions = [
-      {img: "./assets/signs/a.png", answer: "A"},
-      {img: "./assets/signs/b.png", answer: "B"},
-      {img: "./assets/signs/d.png", answer: "D"},
-      {img: "./assets/signs/e.png", answer: "E"},
-      {img: "./assets/signs/h.png", answer: "H"}
+      {img: "../assets/a.png", answer: "A"},
+      {img: "../assets/b.png", answer: "B"},
+      {img: "../assets/d.png", answer: "D"},
+      {img: "../assets/e.png", answer: "E"},
+      {img: "../assets/h.png", answer: "H"}
     ];
 
     let current = 0;
@@ -130,6 +150,7 @@
     const qBox = document.getElementById("questionBox");
     const oBox = document.getElementById("optionsBox");
     const submitBtn = document.getElementById("submitBtn");
+    const retryBtn = document.getElementById("retryBtn");
     const scoreText = document.getElementById("scoreText");
     const attemptsBox = document.getElementById("attemptsBox");
 
@@ -176,25 +197,29 @@
         score++;
       }
 
-      if(attempts >= maxAttempts){
-        alert(`Has llegado al límite de intentos (${maxAttempts}). Examen terminado.`);
+      if(attempts >= maxAttempts || current >= questions.length-1){
         qBox.innerHTML = "<h2>Examen finalizado 📘</h2>";
         oBox.innerHTML = "";
-        submitBtn.disabled = true;
+        submitBtn.style.display = "none";
+        retryBtn.style.display = "inline-block";
         scoreText.textContent = `Puntaje final: ${score}/${questions.length}`;
         return;
       }
 
       current++;
-      if(current >= questions.length){
-        qBox.innerHTML = "<h2>¡Has completado el examen! 🎉</h2>";
-        oBox.innerHTML = "";
-        submitBtn.disabled = true;
-        scoreText.textContent = `Puntaje final: ${score}/${questions.length}`;
-      } else {
-        renderQuestion();
-        scoreText.textContent = `Puntaje: ${score}/${questions.length}`;
-      }
+      renderQuestion();
+      scoreText.textContent = `Puntaje: ${score}/${questions.length}`;
+    }
+
+    retryBtn.onclick = ()=>{
+      // Reiniciar variables
+      current = 0;
+      score = 0;
+      attempts = 0;
+      submitBtn.style.display = "inline-block";
+      retryBtn.style.display = "none";
+      scoreText.textContent = "";
+      renderQuestion();
     }
 
     function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }

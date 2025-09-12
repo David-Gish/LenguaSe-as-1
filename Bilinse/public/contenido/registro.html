@@ -8,7 +8,7 @@
 <body>
   <section class="login-box">
     <h2>Crear Cuenta</h2>
-    <form>
+    <form id="registroForm">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" required>
 
@@ -24,5 +24,26 @@
     <p>¿Ya tienes cuenta?</p>
     <button onclick="window.location.href='login.html'">Iniciar sesión</button>
   </section>
+
+  <script>
+    // Función para registrar usuario
+    document.getElementById("registroForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita recargar la página
+
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const clave = document.getElementById("clave").value;
+
+      // Guardar los datos en localStorage (solo como ejemplo)
+      localStorage.setItem("usuario", JSON.stringify({
+        nombre: nombre,
+        correo: correo,
+        clave: clave
+      }));
+
+      alert("✅ Registro exitoso. Ahora puedes iniciar sesión.");
+      window.location.href = "login.html";
+    });
+  </script>
 </body>
 </html>

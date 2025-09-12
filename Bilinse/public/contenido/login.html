@@ -10,7 +10,24 @@
       const user = document.getElementById("usuario").value;
       const pass = document.getElementById("clave").value;
 
-      if (user === "admin" && pass === "1234") {
+      // Lista de usuarios válidos por defecto
+      const usuariosValidos = [
+        { usuario: "admin", clave: "1234" },
+        { usuario: "estudiante", clave: "5678" },
+        { usuario: "profesor", clave: "abcd" }
+      ];
+
+      // Recuperar usuario registrado desde localStorage (si existe)
+      const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+
+      if (usuarioGuardado) {
+        usuariosValidos.push({ usuario: usuarioGuardado.correo, clave: usuarioGuardado.clave });
+      }
+
+      // Verificar credenciales
+      const valido = usuariosValidos.find(u => u.usuario === user && u.clave === pass);
+
+      if (valido) {
         alert("✅ Bienvenido " + user);
         window.location.href = "cursos.html"; 
       } else {
@@ -23,7 +40,7 @@
   <section class="login-box">
     <h2>Iniciar Sesión</h2>
     <form onsubmit="login(event)">
-      <label for="usuario">Usuario:</label>
+      <label for="usuario">Usuario (correo o nombre de usuario):</label>
       <input type="text" id="usuario" required>
 
       <label for="clave">Contraseña:</label>
