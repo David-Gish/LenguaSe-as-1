@@ -12,8 +12,8 @@
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" required>
 
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" required>
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" required>
 
       <label for="clave">Contraseña:</label>
       <input type="password" id="clave" required>
@@ -31,13 +31,13 @@
       event.preventDefault(); // Evita recargar la página
 
       const nombre = document.getElementById("nombre").value;
-      const correo = document.getElementById("correo").value;
+      const usuario = document.getElementById("usuario").value;
       const clave = document.getElementById("clave").value;
 
       // Guardar los datos en localStorage (solo como ejemplo)
       localStorage.setItem("usuario", JSON.stringify({
         nombre: nombre,
-        correo: correo,
+        usuario: usuario,
         clave: clave
       }));
 

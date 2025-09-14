@@ -7,45 +7,107 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
   <style>
-    body { text-align: center; font-family: Arial, sans-serif; background: #f9f9f9; }
-    #camara { padding: 20px; }
-    video { display: none; } /* video oculto */
-    canvas {
-      width: 500px; max-width: 100%; margin-top: 15px;
-      border-radius: 12px; border: 3px solid #4CAF50;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
     }
-    #letraDetectada, #juego {
-      margin-top: 20px; font-size: 20px; font-weight: bold; color: #2c3e50;
+
+    h2 { color: #005f73; }
+
+    #camara {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 25px;
+      margin-top: 20px;
     }
-    .botones { margin-top: 15px; }
+
+    /* Video + Canvas */
+    .video-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    video { display: none; }
+
+   canvas {
+  width: 548px;   /* ✅ ahora a 548px */
+  max-width: 100%;
+  border-radius: 12px;
+  border: 3px solid #0a9396;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+    /* Panel lateral */
+    .panel-info {
+      background: white;
+      border: 2px solid #94d2bd;
+      border-radius: 12px;
+      padding: 20px;
+      width: 250px;
+      text-align: left;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .panel-info div {
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #003049;
+    }
+
+    /* Botones */
+    .botones {
+      margin-top: 15px;
+    }
+
     button {
-      padding: 10px 20px; margin: 5px;
-      font-size: 16px; border: none; border-radius: 8px;
-      cursor: pointer; background: #4CAF50; color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #0a9396;
+      color: white;
+      transition: background 0.3s ease;
     }
-    button:hover { background: #45a049; }
-    button.stop { background: #e74c3c; }
-    button.stop:hover { background: #c0392b; }
-    #aciertos { margin-top: 10px; font-size: 18px; color: #16a085; }
+
+    button:hover { background: #005f73; }
+
+    button.stop { background: #e63946; }
+    button.stop:hover { background: #b5171a; }
   </style>
 </head>
 <body>
+  <h2>🎮 iGame: Aprende el Abecedario en LSC</h2>
+  <p>Mira la letra en pantalla y haz la seña frente a la cámara.</p>
+
   <section id="camara">
-    <h2>🎮 iGame: Aprende el Abecedario en LSC</h2>
-    <p>Mira la letra en pantalla y haz la seña frente a la cámara.</p>
+    <!-- Video + Canvas -->
+    <div class="video-container">
+      <video id="video" autoplay playsinline></video>
+      <canvas id="output"></canvas>
 
-    <video id="video" autoplay playsinline></video>
-    <canvas id="output"></canvas>
-
-    <div class="botones">
-      <button onclick="iniciarCamara()">Activar Cámara</button>
-      <button class="stop" onclick="detenerCamara()">Desactivar Cámara</button>
-      <button onclick="iniciarJuego()">Iniciar Juego</button>
+      <div class="botones">
+        <button onclick="iniciarCamara()">Activar Cámara</button>
+        <button class="stop" onclick="detenerCamara()">Desactivar Cámara</button>
+        <button onclick="iniciarJuego()">Iniciar Juego</button>
+      </div>
     </div>
 
-    <div id="juego">🎯 Letra objetivo: ---</div>
-    <div id="letraDetectada">✋ Letra detectada: Ninguna</div>
-    <div id="aciertos">✅ Aciertos: 0</div>
+    <!-- Panel de resultados con imagen -->
+    <div class="panel-info">
+      <div id="juego">🎯 Letra objetivo: ---</div>
+      <img id="imagenLetra" src="" alt="Letra objetivo" style="display:none; margin:10px auto; width:120px; border:2px solid #ccc; border-radius:8px;">
+      <div id="letraDetectada">✋ Letra detectada: Ninguna</div>
+      <div id="aciertos">✅ Aciertos: 0</div>
+    </div>
   </section>
 
   <script>
@@ -59,6 +121,18 @@
     let camera = null;
     let letraObjetivo = null;
     let aciertos = 0;
+
+    // 🔤 Diccionario de letras con imágenes
+    const letrasConImagen = {
+      "A": "./contenido/assets/a.png",
+      "B": "./contenido/assets/b.png",
+      "C": "./contenido/assets/c.jpg",
+      "D": "./contenido/assets/d.png",
+      "E": "./contenido/assets/e.png",
+      "F": "./contenido/assets/f.jpg",
+      "G": "./contenido/assets/g.jpg",
+      "H": "./contenido/assets/h.png"
+    };
 
     // Configuración de MediaPipe Hands
     const hands = new Hands({
@@ -82,13 +156,12 @@
       if (results.multiHandLandmarks) {
         for (const landmarks of results.multiHandLandmarks) {
           drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-                         {color: '#00FF00', lineWidth: 3});
+                        {color: '#00FF00', lineWidth: 3});
           drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
 
           const letra = detectarLetra(landmarks);
           letraTexto.innerText = "✋ Letra detectada: " + letra;
 
-          // Comprobar si acertó la letra del juego
           if (letra === letraObjetivo) {
             aciertos++;
             aciertosTexto.innerText = "✅ Aciertos: " + aciertos;
@@ -112,16 +185,16 @@
       };
 
       if (!dedos.pulgar && !dedos.indice && !dedos.medio && !dedos.anular && !dedos.menique) {
-        return "A"; // puño cerrado
+        return "A";
       }
       if (!dedos.pulgar && dedos.indice && !dedos.medio && !dedos.anular && !dedos.menique) {
-        return "D"; // solo índice
+        return "D";
       }
       if (!dedos.pulgar && dedos.indice && dedos.medio && !dedos.anular && !dedos.menique) {
-        return "U"; // índice y medio
+        return "U";
       }
       if (dedos.indice && dedos.medio && dedos.anular && dedos.menique) {
-        return "B"; // mano abierta
+        return "B";
       }
       return "Desconocida";
     }
@@ -134,9 +207,15 @@
     }
 
     function siguienteReto() {
-      const letrasDisponibles = ["A", "B", "D", "U"];
+      const letrasDisponibles = Object.keys(letrasConImagen);
       letraObjetivo = letrasDisponibles[Math.floor(Math.random() * letrasDisponibles.length)];
-      juegoTexto.innerText = "🎯 Letra objetivo: " + letraObjetivo;
+
+      // Mostrar letra y su imagen
+      juegoTexto.innerHTML = `
+        🎯 Letra objetivo: ${letraObjetivo} <br>
+        <img src="${letrasConImagen[letraObjetivo]}" 
+            alt="Letra ${letraObjetivo}" width="120" style="margin-top:10px; border-radius:8px;">
+      `;
     }
 
     // Cámara
@@ -144,7 +223,7 @@
       if (!camera) {
         camera = new Camera(videoElement, {
           onFrame: async () => { await hands.send({image: videoElement}); },
-          width: 500, height: 400
+          width: 440, height: 330   // ✅ ajustado al nuevo tamaño
         });
       }
       camera.start();

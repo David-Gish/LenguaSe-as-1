@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🔢 Quiz: Números en Lengua de Señas</title>
+  <style>
+    body {
+      font-family: "Press Start 2P", cursive;
+      background: linear-gradient(135deg, #222, #444);
+      color: #f1f1f1;
+      text-align: center;
+      padding: 40px;
+    }
+    h2 {
+      color: #ffeb3b;
+      text-shadow: 2px 2px #000;
+    }
+    .quiz-container {
+      max-width: 550px;
+      margin: auto;
+      background: #333;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #ffeb3b;
+      border: 2px solid #ffeb3b;
+    }
+    img {
+      width: 200px;
+      height: auto;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: 3px solid #ffeb3b;
+    }
+    .options {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 12px;
+      font-size: 14px;
+      font-family: "Press Start 2P", cursive;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #ffeb3b;
+      color: #222;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ffc107;
+      transform: scale(1.05);
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    #exitBtn {
+      margin-top: 20px;
+      padding: 10px 18px;
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-family: "Press Start 2P", cursive;
+      cursor: pointer;
+    }
+    #exitBtn:hover {
+      background: #b71c1c;
+    }
+  </style>
+  <!-- Fuente retro -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="quiz-container">
+    <h2>🔢 Quiz: Números en Lengua de Señas</h2>
+    <p>Observa la seña y selecciona el número correcto:</p>
+
+    <div id="quiz">
+      <img id="signImage" src="../assets/numer/1.jpg" alt="Seña de número">
+      <div class="options" id="options"></div>
+    </div>
+
+    <p id="result"></p>
+   <button onclick="salir()">⬅️ Salir</button>
+
+  </div>
+
+  <script>
+ const questions = [
+    { img: "../assets/numer/1.jpg", answer: "1", options: ["2", "1", "4", "5"] },
+    { img: "../assets/numer/2.jpg", answer: "2", options: ["3", "2", "5", "1"] },
+    { img: "../assets/numer/3.jpg", answer: "3", options: ["3", "1", "4", "2"] },
+    { img: "../assets/numer/4.jpg", answer: "4", options: ["2", "5", "4", "3"] },
+    { img: "../assets/numer/5.jpg", answer: "5", options: ["1", "2", "3", "5"] },
+    { img: "../assets/numer/6.jpg", answer: "6", options: ["4", "6", "2", "5"] }
+  ];
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById("signImage").src = q.img;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected) {
+      const q = questions[currentQuestion];
+      if (selected === q.answer) {
+        score++;
+        document.getElementById("result").textContent = "✅ ¡Correcto!";
+        document.getElementById("result").style.color = "lime";
+      } else {
+        document.getElementById("result").textContent = "❌ Incorrecto. La respuesta era " + q.answer;
+        document.getElementById("result").style.color = "red";
+      }
+
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        setTimeout(() => {
+          document.getElementById("result").textContent = "";
+          loadQuestion();
+        }, 1200);
+      } else {
+        setTimeout(() => {
+          const puntos10 = Math.round((score / questions.length) * 10);
+          document.getElementById("quiz").innerHTML = `<h3>🎉 Quiz finalizado</h3>
+          <p>Tu puntaje: ${score} de ${questions.length}</p>
+          <p>Nota sobre 10: <strong>${puntos10}</strong></p>`;
+          document.getElementById("result").textContent = "";
+          document.getElementById("exitBtn").style.display = "inline-block";
+        }, 1200);
+      }
+    }
+
+   function salir() {
+    window.location.href = "../cursos.html";
+    }
+
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
