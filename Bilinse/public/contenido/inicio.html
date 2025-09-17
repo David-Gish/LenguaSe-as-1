@@ -3,212 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Inicio - Lengua de Señas</title>
-  <style>
-    /* ==== ESTILOS GENERALES ==== */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f9f9fb;
-  color: #333;
-  line-height: 1.6;
-}
-
-h2, h3 {
-  text-align: center;
-  color: #1b4965;
-  margin-bottom: 15px;
-}
-
-p {
-  max-width: 900px;
-  margin: 10px auto;
-  text-align: justify;
-  padding: 0 15px;
-}
-
-/* ==== CONTENEDOR DE VIDEOS ==== */
-.video-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px auto;
-}
-
-.video-container iframe {
-  border: 3px solid #1b4965;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  max-width: 100%;
-}
-
-/* ==== ENTREVISTAS ==== */
-.entrevistas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 10px;
-}
-
-.entrevista {
-  background: #ffffff;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.entrevista img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-}
-
-
-.entrevista img {
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  border-radius: 50%; /* la hace redonda */
-  object-fit: cover;
-  border: 4px solid #1b4965;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-  margin: 0 auto 12px auto;
-  display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-.entrevista p {
-  font-size: 15px;
-  color: #444;
-}
-
-/* ==== RESPONSIVE ==== */
-@media (max-width: 768px) {
-  h2, h3 {
-    font-size: 1.3rem;
-  }
-
-  .video-container iframe {
-    width: 100%;
-    height: 220px;
-  }
-}
-
-    .imagenes {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin: 30px 0;
-      flex-wrap: wrap;
-    }
-
-    .imagenes img {
-      width: 45%;
-      max-width: 400px;
-      border-radius: 12px;
-      border: 3px solid #94d2bd;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .imagenes img:hover {
-      transform: scale(1.05);
-    }
-
-    .video-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 25px;
-    }
-
-    iframe {
-      border-radius: 12px;
-      border: 3px solid #94d2bd;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-    }
-
-    /* Fondo con degradado */
-    #inicio {
-      background: linear-gradient(to right, #e0fbfc, #f5f7fa);
-      border-radius: 12px;
-      padding: 40px;
-      margin-bottom: 40px;
-    }
-
-    #historiasLC {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 40px;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-    }
-  </style>
+  <link rel="stylesheet" href="../estilos/index.css">
 </head>
 <body>
   <section id="inicio">
-  <h2>Bienvenidos</h2>
-  <p>
-    La <strong>lengua de señas</strong> es un sistema de comunicación 
-    <em>visual y gestual</em> utilizado principalmente por la comunidad sorda.  
-    A través de las manos, expresiones faciales y movimientos corporales, 
-    se transmiten ideas, emociones y conocimientos.  
-  </p>
+    <h2>Bienvenidos</h2>
+    <p>
+      La <strong>lengua de señas</strong> es un sistema de comunicación 
+      <em>visual y gestual</em> utilizado principalmente por la comunidad sorda.  
+      A través de las manos, expresiones faciales y movimientos corporales, 
+      se transmiten ideas, emociones y conocimientos. Cada país tiene su propia 
+      lengua de señas, por ejemplo, en Colombia existe la<strong>Lengua de Señas Colombiana (LSC)</strong>, reconocida oficialmente 
+      como una lengua natural, con su propia gramática y estructura.  
+    </p>
 
-  <p>
-    Cada país tiene su propia lengua de señas, por ejemplo, en Colombia existe la 
-    <strong>Lengua de Señas Colombiana (LSC)</strong>, reconocida oficialmente 
-    como una lengua natural, con su propia gramática y estructura.  
-  </p>
-
-  <p>
-    La <strong>LSC</strong> fue reconocida jurídicamente mediante la Ley 324 de 1996, 
-    que garantizó su valor como lengua propia de la comunidad sorda del país. 
-    Posteriormente, normativas como la Ley 982 de 2005 y el Decreto 1421 de 2017 
-    fortalecieron los derechos lingüísticos, promoviendo la <em>inclusión educativa, 
-    laboral y social</em> de las personas sordas.
-  </p>
-
-  <p>
-    Esta lengua no es una traducción del español, sino un sistema independiente, 
-    con reglas gramaticales propias y una estructura que combina las señas manuales, 
-    el espacio, la orientación del cuerpo y las expresiones faciales para transmitir 
-    significados complejos.
-  </p>
-
-  <p>
-    Hoy en día, la LSC es un elemento esencial de la <strong>identidad cultural</strong> 
-    de la comunidad sorda en Colombia, además de ser un recurso pedagógico clave en la 
-    <em>educación bilingüe-bicultural</em>, que reconoce tanto la lengua de señas como el 
-    español escrito como medios de aprendizaje.
-  </p>
-
-  <div class="imagenes">
-    <img src="https://previews.123rf.com/images/belchonock/belchonock1309/belchonock130904385/22282237-finger-spelling-the-alphabet-in-american-sign-language-asl-alphabet.jpg" alt="Alfabeto en lengua de señas" />
-    <img src="https://www.shutterstock.com/image-vector/vector-language-deafmutes-hand-american-600nw-1157430907.jpg" alt="Abecedario de señas" />
-  </div>
-
-  <p>
-    Su uso promueve la <strong>inclusión social, educativa y cultural</strong> 
-    de las personas sordas, fomentando una sociedad más diversa, justa y equitativa.
-  </p>
-</section>
-
+    <div class="imagenes">
+      <img src="https://www.shutterstock.com/image-vector/vector-language-deafmutes-hand-american-600nw-1157430907.jpg" alt="Abecedario de señas" />
+    </div>
+  </section>
 
   <!-- Nueva sección para los números en LSC -->
-  <section id="historiasLC">
-  <h2>Historia y Voces de la Lengua de Señas Colombiana (LSC)</h2>
+<section id="historiasLC">
+  <h2>Historia de la Lengua de Señas Colombiana (LSC)</h2>
   <p>
-    La <strong>Lengua de Señas Colombiana (LSC)</strong> es el resultado de una larga 
-    lucha de la comunidad sorda por el reconocimiento de sus derechos lingüísticos 
-    y culturales. A lo largo de los años, se han producido materiales educativos, 
-    testimonios y entrevistas que muestran su importancia en la vida de las personas sordas.
+    Te presentamos un video educativo que forma parte de la serie “Historia de la LSC”,
+    producido por la Federación Nacional de Sordos de Colombia (FENASCOL), que relata 
+    los hitos importantes en el reconocimiento y evolución de esta lengua.
   </p>
   
-  <!-- Primer video -->
   <div class="video-container">
-    <iframe width="560" height="315"
+    <iframe width="316" height="315"
       src="https://www.youtube.com/embed/nYGqvhAnSzw"
       title="Historia de la LSC – Parte 2"
       frameborder="0"
@@ -216,43 +40,8 @@ p {
       allowfullscreen>
     </iframe>
   </div>
-
-  <!-- Segundo video educativo -->
-  <div class="video-container">
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/mWWsrgrmFBY?si=LUo9Ur7ur7U9ZEbx" 
-   title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
-   clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-   referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-  </iframe>
-  </div>
-
-  <!-- Entrevistas con ciudadanos -->
-  <h3>🎤 Entrevistas a Ciudadanos y Experiencias</h3>
-  <div class="entrevistas">
-    <div class="entrevista">
-      <img src="https://talent-land.mx/wp-content/uploads/2025/03/tl-mx-25-speaker-creative-037-juan-perez.jpg" 
-           alt="Ciudadano hablando en LSC" />
-      <p>
-        <strong>Juan Pérez</strong>, líder de la comunidad sorda en Cali, 
-        comparte cómo la LSC transformó su experiencia educativa 
-        y abrió oportunidades de inclusión social.
-      </p>
-    </div>
-
-        <div class="entrevista">
-      <img src="https://i1.rgstatic.net/ii/profile.image/655624606064640-1533324495797_Q512/Carlos-Ramirez-5.jpg" 
-           alt="Docente de lengua de señas" />
-      <p>
-        <strong>Carlos Ramírez</strong>, docente de LSC, destaca la importancia 
-        de la educación bilingüe y el reconocimiento cultural de la lengua de señas.
-      </p>
-    </div>
-
-  </div>
-
-  </div>
 </section>
+
 
 </body>
 </html>
-

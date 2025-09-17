@@ -9,11 +9,11 @@
   <section class="login-box">
     <h2>Crear Cuenta</h2>
     <form id="registroForm">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" required>
-
       <label for="usuario">Usuario:</label>
       <input type="text" id="usuario" required>
+
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" required>
 
       <label for="clave">Contraseña:</label>
       <input type="password" id="clave" required>
@@ -26,18 +26,17 @@
   </section>
 
   <script>
-    // Función para registrar usuario
     document.getElementById("registroForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Evita recargar la página
+      event.preventDefault();
 
-      const nombre = document.getElementById("nombre").value;
       const usuario = document.getElementById("usuario").value;
+      const correo = document.getElementById("correo").value;
       const clave = document.getElementById("clave").value;
 
-      // Guardar los datos en localStorage (solo como ejemplo)
+      // Guardar datos en localStorage
       localStorage.setItem("usuario", JSON.stringify({
-        nombre: nombre,
         usuario: usuario,
+        correo: correo,
         clave: clave
       }));
 
