@@ -1,0 +1,81 @@
+.inicio {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f7fb;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.inicio header {
+  background: linear-gradient(135deg, #004080, #007bff);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.inicio header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.inicio main {
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+  flex: 1;
+}
+
+.inicio h2 {
+  color: #004080;
+  margin-top: 40px;
+}
+
+.inicio p {
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 0;
+  background: #007bff;
+  color: white;
+  padding: 12px;
+}
+
+.inicio footer {
+  background: #004080;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}

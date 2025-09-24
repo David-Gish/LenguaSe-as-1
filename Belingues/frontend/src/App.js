@@ -1,25 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+ // --- Cambiar enlace activo ---
+    const links = document.querySelectorAll("nav a");
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        links.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    // --- Animación iframe al cargar ---
+    const iframe = document.querySelector("iframe");
+    iframe.addEventListener("load", () => {
+      iframe.classList.add("loaded");
+    });
 
-export default App;

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahorcado - Lengua de Señas Colombiana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #f4f7fb, #dbe7f7);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .game-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    #word {
+      font-size: 28px;
+      letter-spacing: 8px;
+      margin: 20px 0;
+    }
+
+    .letters {
+      margin: 20px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+      gap: 8px;
+    }
+
+    .letters button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #3498db;
+      color: #fff;
+      transition: 0.2s;
+    }
+
+    .letters button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .history-box {
+      margin-top: 24px;
+      background: #f4f9ff;
+      padding: 16px;
+      border-left: 4px solid #3498db;
+      border-radius: 6px;
+      text-align: left;
+    }
+
+    #hangman {
+      font-family: monospace;
+      white-space: pre;
+      margin: 20px 0;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    #restartBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #2ecc71;
+      color: white;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Juego del Ahorcado - LSC</h1>
+    <p>Adivina la palabra relacionada con la Lengua de Señas Colombiana</p>
+
+    <div id="hangman"></div>
+    <div id="word">_ _ _ _ _</div>
+
+    <div class="letters" id="letters"></div>
+
+    <div id="message"></div>
+
+    <button id="restartBtn">Reiniciar Juego</button>
+
+    <div class="history-box">
+      <h3>Sobre la LSC</h3>
+      <p>
+        La Lengua de Señas Colombiana (LSC) es el idioma natural de la comunidad sorda en Colombia y fue reconocida oficialmente en 1996. Es una lengua viso-gestual que transmite la historia, la cultura y la identidad de esta comunidad.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const words = [
+      "SEÑA",
+      "COMUNIDAD",
+      "IDENTIDAD",
+      "INCLUSION",
+      "CULTURA",
+      "DERECHOS",
+      "EDUCACION"
+    ];
+
+    let selectedWord, guessed, attempts;
+
+    const wordEl = document.getElementById("word");
+    const lettersEl = document.getElementById("letters");
+    const messageEl = document.getElementById("message");
+    const hangmanEl = document.getElementById("hangman");
+    const restartBtn = document.getElementById("restartBtn");
+
+    const hangmanStages = [
+      ` +---+
+      |   |
+          |
+          |
+          |
+          |
+    =========`,
+      ` +---+
+      |   |
+      O   |
+          |
+          |
+          |
+    =========`,
+      ` +---+
+      |   |
+      O   |
+      |   |
+          |
+          |
+    =========`,
+      ` +---+
+      |   |
+      O   |
+     /|   |
+          |
+          |
+    =========`,
+      ` +---+
+      |   |
+      O   |
+     /|\  |
+          |
+          |
+    =========`,
+      ` +---+
+      |   |
+      O   |
+     /|\  |
+     /    |
+          |
+    =========`,
+      ` +---+
+      |   |
+      O   |
+     /|\  |
+     / \  |
+          |
+    =========`
+    ];
+
+    function initGame() {
+      selectedWord = words[Math.floor(Math.random() * words.length)];
+      guessed = Array(selectedWord.length).fill("_");
+      attempts = 6;
+      messageEl.textContent = "";
+      restartBtn.style.display = "none";
+      renderWord();
+      renderLetters();
+      renderHangman();
+    }
+
+    function renderWord() {
+      wordEl.textContent = guessed.join(" ");
+    }
+
+    function renderLetters() {
+      const alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+      lettersEl.innerHTML = "";
+      alphabet.split("").forEach(letter => {
+        const btn = document.createElement("button");
+        btn.textContent = letter;
+        btn.addEventListener("click", () => handleGuess(letter, btn));
+        lettersEl.appendChild(btn);
+      });
+    }
+
+    function handleGuess(letter, btn) {
+      btn.disabled = true;
+      if (selectedWord.includes(letter)) {
+        [...selectedWord].forEach((l, i) => {
+          if (l === letter) guessed[i] = letter;
+        });
+        renderWord();
+        checkWin();
+      } else {
+        attempts--;
+        renderHangman();
+        if (attempts === 0) {
+          messageEl.textContent = `Perdiste. La palabra era: ${selectedWord}`;
+          disableAllButtons();
+          restartBtn.style.display = "inline-block";
+        }
+      }
+    }
+
+    function renderHangman() {
+      hangmanEl.textContent = hangmanStages[6 - attempts];
+    }
+
+    function checkWin() {
+      if (!guessed.includes("_")) {
+        messageEl.textContent = "¡Felicidades! Adivinaste la palabra.";
+        disableAllButtons();
+        restartBtn.style.display = "inline-block";
+      }
+    }
+
+    function disableAllButtons() {
+      document.querySelectorAll(".letters button").forEach(btn => btn.disabled = true);
+    }
+
+    restartBtn.addEventListener("click", initGame);
+
+    initGame();
+  </script>
+</body>
+</html>

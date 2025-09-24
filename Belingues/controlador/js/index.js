@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const mysqlpool = require('../../db'); 
+const mysqlpool = require('../../backend/db'); 
 
 const app = express();
 app.use(cors());
