@@ -1,12 +1,12 @@
-import express from "express";
-import cors from "cors";
-import router from "./routes.js";
+const express = require("express");
+const router = express.Router();
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+router.get("/lessons", (req, res) => {
+  res.json([
+    { id: 1, title: "Saludos básicos", description: "Aprende cómo saludar en lengua de señas." },
+    { id: 2, title: "Colores", description: "Conoce los colores más comunes en señas." },
+    { id: 3, title: "Números", description: "Practica los números del 1 al 10." },
+  ]);
+});
 
-app.use("/api", router);
-
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
+module.exports = router;
