@@ -2,52 +2,57 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/register", form);
-      alert("Usuario registrado exitosamente");
-    } catch {
-      alert("Error al registrar usuario");
+     const res = await axios.post("http://localhost:5000/api/register", {
+      name,
+      username,
+      password,
+     });
+      alert(res.data.message);
+      window.location.href = "/login";
+    } catch (err) {
+      alert("Error en el registro: " + (err.response?.data?.error || err.message));
     }
   };
 
   return (
-    <div className="flex flex-col items-center mt-10">
-      <h2 className="text-3xl font-bold mb-4 text-blue-800">Registro</h2>
-      <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow-md w-80">
-        <input
-          name="name"
-          placeholder="Nombre completo"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
-          required
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Correo electrónico"
-          value={form.email}
-          onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded"
-          required
-        />
-        <button className="bg-green-700 text-white w-full p-2 rounded hover:bg-green-800">Registrar</button>
-      </form>
+    <div className="register-page">
+      <div className="register-card">
+        <h2 className="register-title">🖐️ Crear Cuenta</h2>
+        <form onSubmit={handleRegister} className="register-form">
+          <input
+            type="text"
+            placeholder="Nombre completo"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Nombre de usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Registrarse</button>
+        </form>
+        <p className="register-footer">
+          ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a>
+        </p>
+      </div>
     </div>
   );
 }

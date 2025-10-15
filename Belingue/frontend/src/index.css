@@ -1,71 +1,848 @@
 
+/* === Estilos personalizados para la plataforma LSC === */
 
-
+/* Paleta de colores */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --primary: #1e3a8a; /* Azul oscuro */
+  --secondary: #2563eb; /* Azul medio */
+  --accent: #facc15; /* Amarillo */
+  --light: #f3f4f6;
+  --dark: #111827;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* Fondo general */
 body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #e0f2fe, #dbeafe);
+  color: var(--dark);
   margin: 0;
+  padding: 0;
+  color: #1e3a8a;
+}
+
+/* Navbar */
+nav {
+  background: linear-gradient(to right, #2563eb, #1e40af);
+  color: white;
+  padding: 1.5rem 0;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #facc15; /* Amarillo */
+}
+
+
+/* === RESET Y BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* === Contenedor principal === */
+.hero {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* === Título principal === */
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1e40af;
+  text-shadow: 2px 2px 4px rgba(30, 64, 175, 0.2);
+  margin-bottom: 1rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* === Párrafo principal === */
+.hero p {
+  max-width: 700px;
+  font-size: 1.2rem;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* === Botón principal === */
+.hero button {
+  background-color: #1d4ed8;
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.9rem 2.2rem;
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  box-shadow: 0 5px 15px rgba(29, 78, 216, 0.3);
+  transition: all 0.3s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.hero button:hover {
+  background-color: #1e40af;
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.5);
+}
+
+/* === Sección de objetivos === */
+.objetivos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+@media (min-width: 768px) {
+  .objetivos {
+    grid-template-columns: repeat(3, 1fr);
   }
-  a:hover {
-    color: #747bff;
+}
+
+/* === Tarjetas === */
+.objetivo-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.objetivo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.objetivo-card h3 {
+  font-size: 1.5rem;
+  color: #1e3a8a;
+  margin-bottom: 0.8rem;
+}
+
+.objetivo-card p {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* === Animaciones === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
-  button {
-    background-color: #f9f9f9;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+
+/* === SECCIONES INFORMATIVAS === */
+section {
+  margin: 50px auto;
+  padding: 40px 25px;
+  max-width: 1000px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-left: 8px solid #2563eb;
+  text-align: justify;
+}
+
+section h2 {
+  text-align: center;
+  color: #1e40af;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+section p {
+  color: #334155;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+section ul {
+  margin-top: 15px;
+  padding-left: 25px;
+  color: #334155;
+}
+
+section ul li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* === FOOTER === */
+footer {
+  background-color: #1e3a8a;
+  color: white;
+  text-align: center;
+  padding: 25px 10px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  margin-top: 80px;
+  box-shadow: inset 0 3px 10px rgba(255,255,255,0.1);
+}
+
+footer p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: #facc15;
+  margin: 0 10px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #fde68a;
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/**/
+
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer */
+footer {
+  background-color: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 4rem;
+  font-size: 0.9rem;
+}
+
+/* === Estilos de Login === */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #dbeafe, #bfdbfe);
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  padding: 2.5rem;
+  width: 380px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.login-title {
+  color: #1e3a8a;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  padding: 0.9rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.login-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.3);
+  outline: none;
+}
+
+.login-form button {
+  background: linear-gradient(90deg, #1e3a8a, #2563eb);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+}
+
+.login-form button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(90deg, #1d4ed8, #3b82f6);
+}
+
+.login-footer {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.login-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Estilo general para Login y Registro === */
+.login-page,
+.register-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #93c5fd, #60a5fa);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.login-card,
+.register-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover,
+.register-card:hover {
+  transform: translateY(-5px);
+}
+
+.login-title,
+.register-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input,
+.register-form input {
+  border: 1px solid #cbd5e1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px #3b82f6;
+}
+
+.login-form button,
+.register-form button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover,
+.register-form button:hover {
+  background-color: #1d4ed8;
+}
+
+.login-footer,
+.register-footer {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.login-footer a,
+.register-footer a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-footer a:hover,
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+/* === Estilos para Courses.jsx === */
+.courses-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #bfdbfe, #93c5fd);
+  padding: 3rem 2rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.courses-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.courses-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin-bottom: 0.5rem;
+}
+
+.courses-header p {
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+}
+
+.course-card {
+  background: #ffffff;
+  border-radius: 1.2rem;
+  padding: 1.8rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.course-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 0.75rem;
+}
+
+.course-card p {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.course-card button {
+  background-color: #facc15;
+  color: #1e293b;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.course-card button:hover {
+  background-color: #eab308;
+  transform: scale(1.05);
+}
+
+
+
+/* === Banner === */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  background-image: url("https://lenguadeseñas.com.ar/wp-content/uploads/2023/12/saludos-en-lenguaje-de-senas.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 0 40px 40px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  margin-bottom: 3rem;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 2rem;
+}
+
+.banner-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.banner-text {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* === ESTILOS GENERALES === */
+.about-page {
+  background: linear-gradient(to bottom, #dbeafe, #bfdbfe);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1e3a8a;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === BANNER === */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 45vh;
+  background: url("https://lenguadeseñas.com.ar/wp-content/uploads/2023/12/saludos-en-lenguaje-de-senas.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.banner-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(29, 78, 216, 0.5);
+  top: 0;
+  left: 0;
+}
+
+.banner-content {
+  position: relative;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  padding: 1rem 2rem;
+  max-width: 800px;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.banner-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #f3f4f6;
+}
+
+/* === CONTENIDO PRINCIPAL === */
+.content {
+  background: white;
+  margin-top: -3rem;
+  z-index: 3;
+  position: relative;
+  max-width: 900px;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  text-align: justify;
+}
+
+.title {
+  text-align: center;
+  color: #1e40af;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.text {
+  color: #374151;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-text {
+    font-size: 1rem;
+  }
+
+  .content {
+    padding: 2rem;
+  }
+}
+
+/* CursoSaludo.css */
+
+.curso-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #d1fae5, #6ee7b7); /* Verde degradado */
+}
+
+.curso-card {
+  max-width: 800px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.curso-card h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #16a34a; /* verde fuerte */
+  margin-bottom: 1rem;
+}
+
+.curso-card p {
+  font-size: 1.125rem;
+  color: #374151; /* gris oscuro */
+  margin-bottom: 1.5rem;
+}
+
+.curso-card a {
+  display: inline-block;
+  background-color: #16a34a;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.curso-card a:hover {
+  background-color: #15803d;
+}
+
+
+/* CursoColores.css */
+
+.colores-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #fef9c3, #fde68a); /* amarillo degradado */
+}
+
+.colores-card {
+  max-width: 800px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.colores-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.colores-card h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #d97706; /* naranja */
+  margin-bottom: 1rem;
+}
+
+.colores-card p {
+  font-size: 1.125rem;
+  color: #374151; /* gris oscuro */
+  margin-bottom: 1.5rem;
+}
+
+.colores-card video {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.colores-card a {
+  display: inline-block;
+  background-color: #d97706;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.colores-card a:hover {
+  background-color: #b45309;
+}
+
+
+/* CursoNumeros.css */
+
+.numeros-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #bfdbfe, #60a5fa); /* azul degradado */
+}
+
+.numeros-card {
+  max-width: 800px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.numeros-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.numeros-card h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d4ed8; /* azul fuerte */
+  margin-bottom: 1rem;
+}
+
+.numeros-card p {
+  font-size: 1.125rem;
+  color: #374151; /* gris oscuro */
+  margin-bottom: 1.5rem;
+}
+
+.numeros-card video {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.numeros-card a {
+  display: inline-block;
+  background-color: #1d4ed8;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.numeros-card a:hover {
+  background-color: #1e40af;
 }

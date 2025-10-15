@@ -1,36 +1,41 @@
 import express from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { openDb } from "./db.js";
-
 const router = express.Router();
-const SECRET = "LSC_SECRET_KEY";
 
-router.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
-  const db = await openDb();
+// simulación de base de datos temporal (en memoria)
+const users = [];
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await db.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]);
-    res.json({ message: "Usuario registrado correctamente" });
-  } catch (err) {
-    res.status(400).json({ error: "El usuario ya existe o error en registro" });
+// ✅ Ruta de registro
+router.post("/register", (req, res) => {
+  const { name, username, password } = req.body;
+
+  if (!name || !username || !password) {
+    return res.status(400).json({ error: "Faltan datos obligatorios" });
   }
+
+  // Verificar si el usuario ya existe
+  const userExists = users.find((u) => u.username === username);
+  if (userExists) {
+    return res.status(400).json({ error: "El usuario ya existe" });
+  }
+
+  // Guardar nuevo usuario
+  const newUser = { id: users.length + 1, name, username, password };
+  users.push(newUser);
+
+  console.log("🆕 Usuario registrado:", newUser);
+  res.json({ message: "Usuario registrado correctamente", user: newUser });
 });
 
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const db = await openDb();
+// ✅ Ruta de login
+router.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find((u) => u.username === username && u.password === password);
 
-  const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
-  if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
+  if (!user) {
+    return res.status(401).json({ error: "Credenciales incorrectas" });
+  }
 
-  const valid = await bcrypt.compare(password, user.password);
-  if (!valid) return res.status(401).json({ error: "Contraseña incorrecta" });
-
-  const token = jwt.sign({ id: user.id, email: user.email }, SECRET, { expiresIn: "2h" });
-  res.json({ message: "Inicio de sesión exitoso", token });
+  res.json({ message: "Inicio de sesión exitoso", user });
 });
 
 export default router;
