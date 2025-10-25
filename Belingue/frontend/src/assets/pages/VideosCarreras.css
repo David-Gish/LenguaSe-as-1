@@ -1,0 +1,226 @@
+
+/* === Animación de entrada === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+article {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* === Tarjetas de video === */
+article {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background-color: #ffffff;
+}
+
+article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* === Títulos de video === */
+
+/* Centrar los títulos de los videos */
+article h3 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+/* Centrar y mejorar la legibilidad del texto descriptivo */
+article p {
+  text-align: center;
+  margin-bottom: 1.2rem; /* separa más del botón */
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+/* Centrar el botón y darle un margen superior */
+.video-placeholder {
+  padding: 1.2rem 0;
+}
+
+.video-placeholder a {
+  display: inline-block;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+/* === Contenedor del iframe === */
+.relative iframe {
+  border-radius: 14px;
+  border: 2px solid #e5e7eb;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.relative iframe:hover {
+  transform: scale(1.02);
+  border-color: #ef4444; /* borde rojo al pasar */
+}
+
+/* Eliminar fondo azul y ALinear nedor de los botones */
+.eliminar-nav {
+  display: flex;
+  justify-content: flex-start; 
+  gap: 1rem; /* separación entre botones */
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+
+
+/* ==== BOTÓN DE "VER EN YOUTUBE" ==== */
+
+.video-placeholder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.video-placeholder a {
+  background-color: #dc2626; 
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.6rem;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.video-placeholder a:hover {
+  background-color: #b91c1c;
+  transform: scale(1.05);
+}
+
+
+
+/* === Banner === */
+.banner {
+  position: relative;
+  background-image: url("https://lenguadeseñas.com.ar/wp-content/uploads/2023/12/saludos-en-lenguaje-de-senas.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centrado vertical */
+  align-items: center; /* centrado horizontal */
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+/* Texto principal */
+.banner-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #facc15; /* Amarillo */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1rem;
+  margin-top: -2rem; /* 🔼 Mueve el texto un poco más arriba */
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+  .banner {
+    height: 60vh;
+    padding: 1rem;
+  }
+  .banner-title {
+    font-size: 2rem;
+    margin-top: -1rem;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* === Sugerencias === */
+section.bg-blue-50 {
+  border-left: 6px solid #ef4444;
+  background-color: #fff5f5;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease;
+}
+
+section.bg-blue-50:hover {
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.15);
+}
+
+section .mb-8 h1 {
+    text-align: center;
+}
+/* === Footer === */
+footer {
+  background: linear-gradient(to right, #1d4ed8, #0891b2);
+  color: white;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+footer div {
+  color: #f3f4f6;
+}
+
+/* === Botones sin fondo === */
+.boton-carrera {
+  background: transparent; /* sin fondo */
+  color: #b91c1c; /* rojo oscuro */
+  border: 2px solid #fca5a5; /* borde rojo claro */
+  border-radius: 9999px; /* pill shape */
+  padding: 10px 24px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
+
+/* Hover: cambia color del texto y agrega sombra ligera */
+.boton-carrera:hover {
+  color: white;
+  background-color: #ef4444; /* rojo medio */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+/* Estado activo (seleccionado) */
+.boton-carrera.activo {
+  background-color: #dc2626; /* rojo fuerte */
+  color: white;
+  border-color: #dc2626;
+  box-shadow: 0 6px 12px rgba(220, 38, 38, 0.3);
+}
+
+/* Pequeño efecto de clic */
+.boton-carrera:active {
+  transform: scale(0.97);
+}

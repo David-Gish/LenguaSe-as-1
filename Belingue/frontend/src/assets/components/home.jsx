@@ -4,14 +4,9 @@ export default function Home() {
       
       {/* === BANNER SOBRE LSC === */}
       <div className="banner">
-        <div className="banner-overlay"></div>
-        <div className="banner-content">
-          <h1 className="banner-title">Lengua de Señas Colombiana 🇨🇴</h1>
-          <p className="banner-text">
-            Una lengua visual y corporal que une culturas, promueve la inclusión y celebra la identidad de la comunidad sorda en Colombia.
-          </p>
-        </div>
+        <h1 className="banner-title">Lengua de Señas Colombiana co</h1>
       </div>
+
 
       {/* === HERO === */}
       <section className="mb-16 mt-10">

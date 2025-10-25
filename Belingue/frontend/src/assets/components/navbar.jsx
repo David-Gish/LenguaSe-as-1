@@ -1,17 +1,54 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const links = [
+    { name: "Inicio", path: "/" },
+    { name: "Sobre LSC", path: "/about" },
+    { name: "Lenguas de Señas", path: "/lenguas-senas" },
+    { name: "Videos por Carrera", path: "/videos-carreras" },
+    { name: "Juego del Ahorcado", path: "/ahorcado" },
+    { name: "Login", path: "/login" },
+  ];
+
   return (
-    <nav className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-wide">LSC Colombia</h1>
-        <ul className="flex gap-6 text-lg">
-          <li><Link to="/" className="hover:text-yellow-300 transition">Inicio</Link></li>
-          <li><Link to="/courses" className="hover:text-yellow-300 transition">Cursos</Link></li>
-          <li><Link to="/about" className="hover:text-yellow-300 transition">Sobre LSC</Link></li>
-          <li><Link to="/login" className="hover:text-yellow-300 transition">Login</Link></li>
+    <nav className="navbar">
+      <div className="container">
+        {/* Título */}
+        <h1 className="title">LSC Colombia</h1>
+
+        {/* Menú escritorio */}
+        <ul className="desktop-menu">
+          {links.map((link) => (
+            <li key={link.name}>
+              <Link to={link.path}>{link.name}</Link>
+            </li>
+          ))}
         </ul>
+
+        {/* Botón hamburguesa móvil */}
+        <button
+          className={`hamburger ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+
+      {/* Menú móvil */}
+      <ul className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        {links.map((link) => (
+          <li key={link.name}>
+            <Link to={link.path} onClick={() => setMenuOpen(false)}>
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }

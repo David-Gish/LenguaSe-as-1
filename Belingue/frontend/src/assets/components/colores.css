@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap');
+
+.kawaii-container {
+  background: linear-gradient(180deg, #ffe6f7 0%, #fff9e6 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  color: #444;
+  padding: 2rem;
+}
+
+.kawaii-card {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
+  text-align: center;
+  padding: 2rem;
+  max-width: 700px;
+  width: 90%;
+  position: relative;
+}
+
+.titulo-kawaii {
+  font-family: 'Fredoka One', cursive;
+  color: #ff6b81;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo {
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.video-kawaii {
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255, 192, 203, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+/* Juego */
+.juego-kawaii {
+  margin-top: 1rem;
+}
+
+.muestra-color {
+  width: 150px;
+  height: 150px;
+  margin: 1rem auto;
+  border-radius: 20px;
+  border: 4px solid white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.opciones-kawaii {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.boton-color {
+  background: #fff0f5;
+  border: none;
+  border-radius: 20px;
+  padding: 0.7rem 1.4rem;
+  cursor: pointer;
+  font-weight: 700;
+  color: #ff6b81;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+  transition: 0.3s ease;
+}
+
+.boton-color:hover {
+  background: #ffb6c1;
+  color: white;
+  transform: scale(1.05);
+}
+
+.mensaje {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #ff6b81;
+  font-weight: bold;
+}
+
+.puntuacion {
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.volver-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  background: #ff6b81;
+  color: white;
+  padding: 0.6rem 1.3rem;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.5);
+  transition: 0.3s ease;
+}
+
+.volver-btn:hover {
+  background: #ff85a2;
+  transform: translateY(-2px);
+}

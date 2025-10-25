@@ -1,0 +1,169 @@
+:root {
+  --primary: #1e3a8a; /* Azul oscuro */
+  --secondary: #2563eb; /* Azul medio */
+  --accent: #facc15; /* Amarillo */
+  --light: #f3f4f6;
+  --dark: #111827;
+}
+
+/* === BANNER === */
+.banner {
+  position: relative;
+  height: 60vh;
+  background-image: url("https://lenguadeseñas.com.ar/wp-content/uploads/2023/12/saludos-en-lenguaje-de-senas.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+/* === Banner === */
+.banner {
+  position: relative;
+  background-image: url("https://lenguadeseñas.com.ar/wp-content/uploads/2023/12/saludos-en-lenguaje-de-senas.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centrado vertical */
+  align-items: center; /* centrado horizontal */
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+/* Texto principal */
+.banner-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #facc15; /* Amarillo */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1rem;
+  margin-top: -2rem; /* 🔼 Mueve el texto un poco más arriba */
+}
+
+/* Subtexto */
+.banner-text {
+  max-width: 800px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #f3f4f6;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+  .banner {
+    height: 60vh;
+    padding: 1rem;
+  }
+  .banner-title {
+    font-size: 2rem;
+    margin-top: -1rem;
+  }
+  .banner-text {
+    font-size: 1rem;
+  }
+}
+
+/* === ENCABEZADO === */
+.header {
+  text-align: center;
+  color: rgb(14, 197, 238);
+  padding: 3rem 1rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* === CONTENIDO === */
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 250px; /* altura más amplia */
+  object-fit: contain; /* muestra la imagen completa sin recortar */
+  background-color: var(--light); /* agrega fondo neutro para imágenes más pequeñas */
+  border-bottom: 3px solid var(--secondary);
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card img:hover {
+  transform: scale(1.03);
+}
+
+
+.card h2 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin: 1rem;
+}
+
+.card p {
+  color: var(--dark);
+  margin: 0 1rem 1.5rem;
+  text-align: justify;
+}
+
+/* === SECCIÓN ISL === */
+.isl-section {
+  background: var(--secondary);
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.isl-section h2 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.isl-section p {
+    color: var(--light);
+}
+
+
+/* === PIE DE PÁGINA === */
+.footer {
+  background: var(--primary);
+  color: var(--light);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
