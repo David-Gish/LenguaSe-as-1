@@ -153,13 +153,56 @@
 }
 
 
-/* === PIE DE PÁGINA === */
-.footer {
-  background: var(--primary);
-  color: var(--light);
+/* === FOOTER BASE === */
+footer {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: var(--text-light);
   text-align: center;
-  padding: 1.5rem;
-  font-size: 0.95rem;
+  padding: 1.5rem 1rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+  font-family: "Poppins", sans-serif;
+}
+
+/* === TEXTO PRINCIPAL === */
+footer p {
+  margin: 0.3rem 0;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* === ENLACES === */
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+footer a:hover {
+  color: white;
+  text-shadow: 0 0 6px var(--accent);
+}
+
+/* === ÍCONOS SOCIALES (opcional) === */
+footer .social-icons {
+  margin-top: 0.7rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+footer .social-icons a {
+  color: var(--accent);
+  font-size: 1.3rem;
+  transition: 0.3s;
+}
+
+footer .social-icons a:hover {
+  color: white;
+  transform: scale(1.1);
 }
 
 /* === ANIMACIONES === */

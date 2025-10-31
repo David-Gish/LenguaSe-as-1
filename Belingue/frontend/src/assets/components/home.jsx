@@ -53,9 +53,7 @@ export default function Home() {
           La <strong>Lengua de Señas Colombiana (LSC)</strong> es el medio de comunicación
           natural de la comunidad sorda en Colombia. Fue reconocida oficialmente mediante
           la <strong>Ley 324 de 1996</strong>, que destaca su importancia cultural, lingüística
-          y educativa dentro del país.
-          <br /><br />
-          La LSC es una lengua <strong>visual y gestual</strong>, basada en movimientos de las manos,
+          y educativa dentro del país. La LSC es una lengua <strong>visual y gestual</strong>, basada en movimientos de las manos,
           expresiones faciales y posiciones corporales que permiten construir significados
           y transmitir ideas. No es universal, ni una traducción directa del español,
           sino una lengua completa con su propia <strong>gramática, sintaxis y vocabulario</strong>.
@@ -92,12 +90,10 @@ export default function Home() {
       </section>
 
       {/* === FOOTER === */}
-      <footer className="bg-blue-800 w-full text-white py-6 text-center rounded-t-3xl shadow-inner">
-        <p className="text-sm">
-          © {new Date().getFullYear()} LSC Colombia — Promoviendo la educación, la inclusión
-          y la cultura de la comunidad sorda.
-        </p>
-      </footer>
+        <footer>
+          <p>© 2025 LSC Colombia | Todos los derechos reservados</p>
+        </footer>
+
     </div>
   );
 }

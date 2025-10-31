@@ -40,9 +40,10 @@ export default function About() {
 
 
         {/* === PIE DE PÁGINA === */}
-      <footer className="footer">
-        <p>© 2025 Proyecto LSC Colombia — Promoviendo la inclusión y el aprendizaje viso-gestual.</p>
+      <footer>
+        <p>© 2025 LSC Colombia | Todos los derechos reservados</p>
       </footer>
+
     </div>
 
     

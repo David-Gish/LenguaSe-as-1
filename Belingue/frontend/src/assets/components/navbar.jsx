@@ -5,12 +5,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { name: "Inicio", path: "/" },
-    { name: "Sobre LSC", path: "/about" },
-    { name: "Lenguas de Señas", path: "/lenguas-senas" },
-    { name: "Videos por Carrera", path: "/videos-carreras" },
-    { name: "Juego del Ahorcado", path: "/ahorcado" },
-    { name: "Login", path: "/login" },
+    { name: "INICIO", path: "/" },
+    { name: "SOBRE LSC", path: "/about" },
+    { name: "LENGUAS DE SEÑAS", path: "/lenguas-senas" },
+    { name: "VIDEOS DE CARRERAS", path: "/videos-carreras" },
+    { name: "EL AHORCADO", path: "/ahorcado" },
+    { name: "👤", path: "/login" },
   ];
 
   return (

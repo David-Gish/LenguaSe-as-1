@@ -95,11 +95,9 @@ export default function VideosCarreras() {
         </main>
       </section>
 
-      <footer className="border-t bg-white py-6 mt-12">
-        <div className="max-w-6xl mx-auto px-6 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Plataforma LSC · Recursos educativos para Psicología e Ingeniería de Sistemas
-        </div>
-      </footer>
+     <footer>
+          <p>© 2025 LSC Colombia | Todos los derechos reservados</p>
+        </footer>
     </div>
   );
 }

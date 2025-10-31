@@ -1,10 +1,11 @@
 .contenedor-ahorcado {
   max-width: 600px;
-  margin: auto;
+  margin: 80px auto; 
   text-align: center;
   padding: 20px;
   font-family: sans-serif;
 }
+
 
 .palabra-oculta {
   font-size: 2rem;

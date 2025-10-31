@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./ahorcados.css";
 
 const frases = [
-  { texto: "INCLUSION EDUCATIVA", pista: "Proceso que garantiza educación para todos sin discriminación" },
-  { texto: "COMUNIDAD SORDA", pista: "Grupo de personas que utilizan lengua de señas como comunicación principal" },
-  { texto: "PATRIMONIO CULTURAL", pista: "Bienes, tradiciones o lenguas que representan la identidad de un pueblo" },
-  { texto: "COMUNICACION VISOGESTUAL", pista: "Forma de comunicación basada en gestos y visión" },
-  { texto: "ACCESIBILIDAD LINGUISTICA", pista: "Facilitar la comprensión y uso de un idioma para todos" },
-  { texto: "BILINGUISMO ESPAÑOL", pista: "Uso de dos lenguas, incluyendo el español, en educación" },
-  { texto: "IDENTIDAD SORDA", pista: "Conciencia y orgullo de pertenecer a la comunidad sorda" },
-  { texto: "INTERPRETE DE SEÑAS", pista: "Profesional que traduce entre lengua de señas y lengua oral" }
+  { texto: "INCLUSION", pista: "Participar sin excluir a nadie" },
+  { texto: "SEÑAS", pista: "Forma visual de comunicarse" },
+  { texto: "COMUNIDAD", pista: "Grupo con intereses comunes" },
+  { texto: "CULTURA", pista: "Costumbres y tradiciones de un pueblo" },
+  { texto: "ACCESO", pista: "Facilidad para usar o entender algo" },
+  { texto: "BILINGUE", pista: "Persona que usa dos idiomas" },
+  { texto: "IDENTIDAD", pista: "Sentido de pertenencia a un grupo" },
+  { texto: "INTERPRETE", pista: "Traduce entre dos lenguas" },
+  { texto: "INCLUSION EDUCATIVA", pista: "Educación para todos sin exclusión" },
+  { texto: "LENGUA DE SEÑAS", pista: "Idioma visual de la comunidad sorda" }
 ];
+
 
 const maxIntentos = 6;
 
@@ -101,9 +104,9 @@ export default function Ahorcado() {
         ))}
       </div>
 
-      <button className="reiniciar-btn" onClick={iniciarJuego}>
-        🔄 Reiniciar
-      </button>
+            <button className="reiniciar-btn" onClick={iniciarJuego}>
+          🔄 Reiniciar
+        </button>
     </div>
   );
 }
