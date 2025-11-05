@@ -1,38 +1,44 @@
+// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./assets/components/navbar";
-import Login from "./assets/components/login";
-import Register from "./assets/components/register";
-import Courses from "./assets/components/courses";
-import Home from "./assets/components/home";
-import LenguasSenas from "./assets/pages/lenguasenas";
-import About from "./assets/pages/about";
-import VideosCarreras from "./assets/pages/VideosCarreras";
-import Ahorcado from "./assets/components/Ahorcado";
-import CursoSaludo from "./assets/components/curso-saludo";
-import CursoColores from "./assets/components/curso-colores";
-import CursoNumeros from "./assets/components/curso-numeros";
+import { useEffect } from "react";
+import Navbar from "./components/navbar";
+import Login from "./components/login";
+import Register from "./components/register";
+import Courses from "./components/courses";
+import Home from "./components/home";
+import LenguasSenas from "./pages/lenguasenas";
+import About from "./pages/about";
+import VideosCarreras from "./pages/VideosCarreras";
+import CursoSaludo from "./components/curso-saludo";
+import CursoColores from "./components/curso-colores";
+import CursoNumeros from "./components/curso-numeros";
 
 function App() {
+  // 🔹 Probar conexión con el backend
+  useEffect(() => {
+    fetch("http://localhost:4000/api/usuarios")
+      .then((res) => res.json())
+      .then((data) => console.log("✅ Conectado al backend:", data))
+      .catch((err) => console.error("❌ Error al conectar con el servidor:", err));
+  }, []);
+
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/" element={<h1 className="text-center mt-10 text-3xl font-bold text-blue-700">Bienvenido a la Plataforma LSC</h1>} />
+        <Route path="/" element={<Home />} /> {/* Aquí se usa Home */}
         <Route path="/about" element={<About />} />
         <Route path="/lenguas-senas" element={<LenguasSenas />} />
         <Route path="/videos-carreras" element={<VideosCarreras />} />
-        <Route path="/ahorcado" element={<Ahorcado />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/curso-saludo" element={<CursoSaludo />} />
         <Route path="/curso-colores" element={<CursoColores />} />
         <Route path="/curso-numeros" element={<CursoNumeros />} />
-        
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;

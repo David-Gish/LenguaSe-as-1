@@ -8,7 +8,7 @@ export default function Register() {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Obtener usuarios previos
+    // Obtener usuarios guardados (si existen)
     const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
 
     // Verificar si el usuario ya existe
@@ -18,14 +18,21 @@ export default function Register() {
       return;
     }
 
-    // Agregar nuevo usuario
-    const nuevoUsuario = { nombre: name, usuario: username, clave: password };
-    usuariosGuardados.push(nuevoUsuario);
+    // Crear nuevo usuario
+    const nuevoUsuario = {
+      nombre: name,
+      usuario: username,
+      clave: password,
+    };
 
-    // Guardar en localStorage
+    // Agregar al array y guardar
+    usuariosGuardados.push(nuevoUsuario);
     localStorage.setItem("usuarios", JSON.stringify(usuariosGuardados));
 
-    alert("✅ Registro exitoso. Ahora puedes iniciar sesión.");
+    alert(`✅ Registro exitoso. Bienvenido, ${username}!`);
+    console.log("Usuarios registrados:", usuariosGuardados);
+
+    // Redirigir al login
     window.location.href = "/login";
   };
 

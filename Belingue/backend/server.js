@@ -2,32 +2,46 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// Conexión con MySQL
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'dbsenasconecta'
 });
+
 db.connect(err => {
     if (err) throw err;
-    console.log('Conectado a MySQL');
+    console.log('✅ Conectado a MySQL');
 });
-app.post('/api/usuarios', (req, res) => {
-    const { nombre, correo, contrasena } = req.body;
-    const sql = 'INSERT INTO tblusuarios (nombre, correo, contrasena) VALUES (?, ?, ?)';
-    db.query(sql, [nombre, correo, contrasena], (err, result) => {
-        if (err) return res.status(500).send(err);
-        res.send({ mensaje: 'Usuario registrado' });
+
+// Endpoint para registrar usuarios
+app.get('/api/usuarios', (req, res) => {
+  const sql = 'SELECT * FROM tblusuarios';
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+
+// ✅ Nuevo endpoint: obtener lecciones desde la base de datos
+app.get('/api/lecciones', (req, res) => {
+    const sql = 'SELECT * FROM tbllecciones';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error al obtener las lecciones:', err);
+            return res.status(500).send(err);
+        }
+        res.json(results);
     });
 });
-app.get('/api/lecciones', (req, res) => {
-    res.json([
-        { id: 1, titulo: 'Saludos básicos', descripcion: 'Aprende a saludar en LSC' },
-        { id: 2, titulo: 'Familia', descripcion: 'Señas para miembros de la familia' },
-        { id: 3, titulo: 'Saludos básicos', descripcion: 'Aprende a saludar en LSC' }
-    ]);
-});
-app.listen(3000, () => console.log('Servidor Express en puerto 3000'));
+
+// Iniciar el servidor
+app.listen(4000, () => console.log('Servidor Express en puerto 4000'));
+

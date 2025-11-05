@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -9,7 +8,6 @@ export default function Navbar() {
     { name: "SOBRE LSC", path: "/about" },
     { name: "LENGUAS DE SEÑAS", path: "/lenguas-senas" },
     { name: "VIDEOS DE CARRERAS", path: "/videos-carreras" },
-    { name: "EL AHORCADO", path: "/ahorcado" },
     { name: "👤", path: "/login" },
   ];
 

@@ -62,31 +62,38 @@ export default function LenguasSenas() {
           </p>
         </div>
 
-        <div className="card">
-          <img
-            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhwldBQXk9Dwfz__EYJCsZrIgWLDxyplNMqoLvB0BU3rjSfJALPLhAjcyFg2AqnnLq5VyW9Z8ZCNj6NPc0dkwvDwEu625iy6ndTu0dWNUSjvTu0mSdRNXIpFi6Km6Eo24NjcG99n_7eqSk/s320/FAMILIA.jpg"
-            alt="Lengua de Señas Colombiana (LSC)"
-          />
-          <h2>Lengua de Señas Colombiana (LSC)</h2>
-          <p>
-            La LSC es reconocida oficialmente en Colombia desde 1996 
-            como lengua natural de la comunidad sorda. Su estructura viso-gestual 
-            y espacial permite expresar ideas complejas y fortalecer la identidad cultural. 
-            Hoy en día, se promueve su enseñanza en instituciones educativas y espacios digitales.
-          </p>
-        </div>
       </main>
+        {/* === SECCIÓN ISL === */}
+        <section className="isl-section">
+          <h2>🤝 Lengua de Señas Internacional (ISL)</h2>
+          <p>
+            La <strong>ISL (International Sign Language)</strong> se usa principalmente en eventos
+            internacionales para facilitar la comunicación entre personas sordas de distintos países.
+            No sustituye a las lenguas nacionales, sino que actúa como un <strong>puente lingüístico</strong>
+            en encuentros globales y conferencias internacionales.
+          </p>
+          <img
+            src="https://planlea.edu.do/wp-content/uploads/2021/09/lengua-de-sen%CC%83as-amor.jpg"
+            alt="Lengua de Señas Internacional"
+            className="isl-img"
+          />
+        </section>
 
-      {/* === SECCIÓN ISL === */}
-      <section className="isl-section">
-        <h2>🤝 Lengua de Señas Internacional (ISL)</h2>
-        <p>
-          La ISL (International Sign Language) se usa principalmente en eventos internacionales 
-          para facilitar la comunicación entre personas sordas de distintos países. 
-          No sustituye a las lenguas nacionales, sino que actúa como un puente lingüístico 
-          en encuentros globales.
-        </p>
-      </section>
+        {/* === SECCIÓN COMUNIDAD SORDA GLOBAL === */}
+        <section className="global-section">
+          <h2>🌐 Comunidad Sorda Global</h2>
+          <p>
+            La comunidad sorda global comparte valores, cultura y experiencias a través de diferentes
+            lenguas de señas. Gracias a la tecnología y las redes sociales, hoy es posible conectarse,
+            aprender e intercambiar conocimientos entre personas sordas de todo el mundo.
+          </p>
+          <img
+            src="https://www.plataformaong.org/ARCHIVO/fotografias/noticias/1632312603_noticia-web-1.png"
+            alt="Comunidad Sorda Global"
+            className="global-img"
+          />
+        </section>
+
 
       {/* === PIE DE PÁGINA === */}
          <footer>

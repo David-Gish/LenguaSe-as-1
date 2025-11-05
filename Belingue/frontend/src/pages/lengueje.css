@@ -137,19 +137,78 @@
 
 /* === SECCIÓN ISL === */
 .isl-section {
-  background: var(--secondary);
-  color: white;
+  background-color: #e0f2fe;
+  padding: 70px 20px;
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 0 auto 50px auto;
   text-align: center;
-  padding: 3rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.isl-section:hover {
+  background-color: #dbeafe;
+  transform: translateY(-4px);
 }
 
 .isl-section h2 {
+  color: #1e40af;
   font-size: 2rem;
-  color: var(--accent);
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
 }
+
 .isl-section p {
-    color: var(--light);
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.isl-img {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* === SECCIÓN COMUNIDAD SORDA GLOBAL === */
+.global-section {
+  background-color: #fef3c7;
+  padding: 70px 20px;
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 0 auto 70px auto;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.global-section:hover {
+  background-color: #fde68a;
+  transform: translateY(-4px);
+}
+
+.global-section h2 {
+  color: #b45309;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.global-section p {
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.global-img {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 
